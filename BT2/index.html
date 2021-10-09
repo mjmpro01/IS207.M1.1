@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <table class="table border border-3 border-dark table-warning">
+      <tr colspan="3" class="border border-3">
+        <th colspan="3" class="text-center">
+          <b>THỰC ĐƠN</b>
+        </th>
+      </tr>
+      <tr class="border border-3 text-info text-center">
+        <th scope="col">Thức ăn</th>
+        <th scope="col">Nước uống</th>
+        <th scope="col">Thời điểm</th>
+      </tr>
+      <tr>
+        <td class="align-items-center">
+          <select name="thucan" id="thucAn" multiple>
+            <option value="Bún bò">Bún bò</option>
+            <option value="Hủ tiếu">Hủ tiếu</option>
+            <option value="Bánh canh">Bánh canh</option>
+            <option value="Phở bò">Phở bò</option>
+            <option value="Nuôi">Nuôi</option>
+            <option value="Bánh mì thịt">Bánh mì thịt</option>
+            <option value="Bánh cuốn">Bánh cuốn</option>
+          </select>
+        </td>
+
+        <td>
+          <select value="nuocUong" id="nuocUong" multiple>
+            <option value="Cà phê đá">Cà phê đá</option>
+            <option value="Cà phê sữa đá">Cà phê sữa đá</option>
+            <option value="Chanh dây">Chanh dây</option>
+            <option value="Chanh muối">Chanh muối</option>
+            <option value="Xí muội">Xí muội</option>
+            <option value="Sữa tươi">Sữa tươi</option>
+            <option value="Cam vắt">Cam vắt</option>
+          </select>
+        </td>
+
+        <td>
+          <input type="radio" name="option" id="day" value="day" /> Ban ngày <br>
+          <input type="radio" name="option" id ="night" value="night" /> Ban đêm
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" align="center">
+          <input type="submit" onclick="submit()" />
+        </td>
+      </tr>
+    </table>
+
+    <table id="hd"class="table border border-3 border-dark table-warning">
+        <tr colspan="3" class="border border-3">
+          <th colspan="3" class="text-center">
+            <b>HÓA ĐƠN</b>
+          </th>
+        </tr>
+        <tr class="border border-3 text-info text-center">
+          <th scope="col">Món ăn đã dùng</th>
+          <th scope="col">Tiền</th>
+        </tr>
+      </table>
+    <script language="javascript" type="text/javascript">
+      function submit() {
+        const menu = {
+          "Bún bò": 20000,
+          "Hủ tiếu": 18000,
+          "Bánh canh": 17000,
+          "Phở bò": 19000,
+          "Nuôi": 15000,
+          "Bánh mì thịt": 12000,
+          "Bánh cuốn": 15000,
+          "Cà phê đá": 12000,
+          "Cà phê sữa đá": 15000,
+          "Chanh dây": 13000,
+          "Chanh muối": 12000,
+          "Xí muội": 14000,
+          "Sữa tươi": 13000,
+          "Cam vắt": 17000,
+        };
+        let food = $("#thucAn").val();
+        let drink = $("#nuocUong").val();  
+        let day = $("input:radio[name=option]:checked").val()
+
+        food.map((attr) => {
+            $('#hd').append(`<tr>
+                <td>
+                    <p class= "text-center"> ${attr}</p>
+                </td>
+                <td>
+                    <p class= "text-center"> ${menu[attr]}</p>
+                </td>
+                </tr>`);
+        });
+        drink.map((attr) => {
+            $('#hd').append(`<tr>
+                <td>
+                    <p class= "text-center"> ${attr}</p>
+                </td>
+                <td>
+                    <p class= "text-center"> ${menu[attr]}</p>
+                </td>
+                </tr>`);
+        });
+        const count = function(){
+            let c = 0;
+            food.map( att => {
+                c += Number(menu[att]) 
+            })
+            drink.map( att => {
+                c += menu[att]
+            })
+            if(day === "night")
+                c *= 1.1;
+            return c;
+        }
+        $('#hd').append(`<tr>
+                <td>
+                    <p class= "text-center"> Tổng tiền</p>
+                </td>
+                <td>
+                    <p class= "text-center"> ${count()}</p>
+                </td>
+                </tr>`);
+        
+        //document.getElementById("luongthang").value = result;
+      }
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
